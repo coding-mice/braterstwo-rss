@@ -3,7 +3,7 @@ define("DOC_ROOT",__DIR__);
 
 /* Cookie path, make sure it's writable! */
 $cookiePath = DOC_ROOT."/ctemp";
-$cookie_file_path = $cookiePath."/cookie.txt";
+$cookieFilePath = $cookiePath."/cookie.txt";
 
 /* Forum timezone so posting time matches */
 date_default_timezone_set('Europe/Paris');
@@ -16,7 +16,7 @@ $values['password'] = $_GET['password'];
 $loginUrl="https://braterstwo.eu/profil/?dame=login";
 $username = trim($values["email"]);
 $password = trim($values["password"]);
-$postinfo = "email=".$username."&password=".$password."&frm_action=login-user&redirect_to=";
+$postInfo = "email=".$username."&password=".$password."&frm_action=login-user&redirect_to=";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_HEADER, false);
@@ -24,7 +24,7 @@ curl_setopt($ch, CURLOPT_NOBODY, false);
 curl_setopt($ch, CURLOPT_URL, $loginUrl);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 
-curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file_path);
+curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFilePath);
 curl_setopt($ch, CURLOPT_COOKIE, "cookiename=0");
 
 curl_setopt($ch, CURLOPT_USERAGENT,
@@ -35,7 +35,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postInfo);
 curl_exec($ch);
 
 /* Grab the target site */
